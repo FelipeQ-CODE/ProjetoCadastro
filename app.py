@@ -278,3 +278,5 @@ class App(ctk.CTk):
 if __name__=="__main__":
     app = App()
     app.mainloop()
+
+#executavel criado com auto-py-to-exe
