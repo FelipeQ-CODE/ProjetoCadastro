@@ -90,13 +90,14 @@ class App(ctk.CTk):
         self.lb_apm = ctk.CTkLabel(self, text="Tema",bg_color="transparent",text_color=['#000',"#fff"]).place(x=50,y=500)
         
         #Tema de cores Light ,Dark;
-        self.opt_apm = ctk.CTkOptionMenu(self,values=["Light","Dark","System"], command=self.change_apm).place(x=50, y=530)
+        self.opt_apm = ctk.CTkOptionMenu(self,values=["Light","Dark"], command=self.change_apm).place(x=50, y=530)
     
     #Faixa azul do app    
     def todo_sistema(self):
-        frame =ctk.CTkFrame(self, width=800,height=50,corner_radius=0,bg_color="teal",fg_color="teal").place(x=0,y=10)    
+        frame =ctk.CTkFrame(self, width=800,height=50,corner_radius=0,bg_color="Cyan",fg_color="Cyan")
+        frame.place(x=0,y=10)    
     #titulo
-        title=ctk.CTkLabel(frame,text="Sistema de Gestao de Clientes", font=("Century Gothic bold",24),text_color="#fff").place(x=190,y=10)
+        title=ctk.CTkLabel(frame,text="Sistema de Gestao de Clientes", font=("Century Gothic bold",24),text_color="#000").place(x=190,y=10)
     #Subtitulo
         span= ctk.CTkLabel(self,text="Por favor ,preencha o formulario !", font=("Century Gothic bold",16),text_color=["#000","#fff"]).place(x=50 , y=70)
          
@@ -120,48 +121,51 @@ class App(ctk.CTk):
     #definindo a função o botão
         def submit():
             #pegar os dados dos entrys
-            nome = nome_values.get()
-            contact= contact_values.get()
-            age = age_values.get()
+            nome = nome_value.get()
+            contact= contact_value.get()
+            age = age_value.get()
             gender = gender_combobox.get()
             adrress= address_entry.get()
             obs = obs_entry.get(0.0,END)
             
+        #Se o usuario nao preencher todos os dados
+            if (nome =="" or contact =="" or age=="" or adrress==""):
+                messagebox.showerror("Sistema","Erro!\n Por favor preencha todos os dados!")
+            else:
         #Recebendo dados no nosso Excel ou banco de dados!
-
-            ficheiro = openpyxl.load_workbook('Clientes.xlsx')
-            
-            folha = ficheiro.active
-            folha.cell(column=1, row=folha.max_row + 1, value=nome)
-            folha.cell(column=2, row=folha.max_row, value=contact)
-            folha.cell(column=3, row=folha.max_row, value=age)
-            folha.cell(column=4, row=folha.max_row, value=gender)
-            folha.cell(column=5, row=folha.max_row, value=address)
-            folha.cell(column=6, row=folha.max_row, value=obs)
-            
-            ficheiro.save(r"Clientes.xlsx")
-            messagebox.showinfo("Sistema","Dados Cadastrados com sucesso!")
+                ficheiro = openpyxl.load_workbook('Clientes.xlsx')
+                
+                folha = ficheiro.active
+                folha.cell(column=1, row=folha.max_row + 1, value=nome)
+                folha.cell(column=2, row=folha.max_row, value=contact)
+                folha.cell(column=3, row=folha.max_row, value=age)
+                folha.cell(column=4, row=folha.max_row, value=gender)
+                folha.cell(column=5, row=folha.max_row, value=adrress)
+                folha.cell(column=6, row=folha.max_row, value=obs)
+                
+                ficheiro.save(r"Clientes.xlsx")
+                messagebox.showinfo("Sistema","Dados Cadastrados com sucesso!")
             
             
         def clear():
-            nome_values.set("")
-            contact_values.set("")
-            age_values.set("")
-            address_values.set("")
+            nome_value.set("")
+            contact_value.set("")
+            age_value.set("")
+            address_value.set("")
             obs_entry.delete(0.0,END)
         
     #Variaveis de Texto
-        nome_values=StringVar()
-        contact_values=StringVar()
-        age_values=StringVar()
-        address_values=StringVar()
+        nome_value=StringVar()
+        contact_value=StringVar()
+        age_value=StringVar()
+        address_value=StringVar()
         
         
     #Entry Caixa de dialogo para informação. obs caixa em branco
-        nome_entry= ctk.CTkEntry(self,width=350,textvariable=nome_values,font=("Century Gohtic bold",16),fg_color="transparent")    
-        contact_entry= ctk.CTkEntry(self,width=200,textvariable=contact_values,font=("Century Gohtic bold",16),fg_color="transparent")
-        age_entry= ctk.CTkEntry(self,width=150,textvariable=age_values,font=("Century Gohtic bold",16),fg_color="transparent")
-        address_entry= ctk.CTkEntry(self,width=200,textvariable=address_values,font=("Century Gohtic bold",16),fg_color="transparent")        
+        nome_entry= ctk.CTkEntry(self,width=350,textvariable=nome_value,font=("Century Gohtic bold",16),fg_color="transparent")    
+        contact_entry= ctk.CTkEntry(self,width=200,textvariable=contact_value,font=("Century Gohtic bold",16),fg_color="transparent")
+        age_entry= ctk.CTkEntry(self,width=150,textvariable=age_value,font=("Century Gohtic bold",16),fg_color="transparent")
+        address_entry= ctk.CTkEntry(self,width=200,textvariable=address_value,font=("Century Gohtic bold",16),fg_color="transparent")        
     
     #Combobox caixa de genero com  3 opçoes
         gender_combobox = ctk.CTkComboBox(self,values=["Masculino","Feminino","Trasgenero"],font=("Centurty Gothic bold",14),width=150)
@@ -208,27 +212,27 @@ class App(ctk.CTk):
 
             
         def clear():
-            nome_values.set("")
-            contact_values.set("")
-            age_values.set("")
-            address_values.set("")
+            nome_value.set("")
+            contact_value.set("")
+            age_value.set("")
+            address_value.set("")
             obs_entry.delete(0.0,END)
         
     #Variaveis de Texto
-        nome_values=StringVar()
-        contact_values=StringVar()
-        age_values=StringVar()
-        address_values=StringVar()
+        nome_value=StringVar()
+        contact_value=StringVar()
+        age_value=StringVar()
+        address_value=StringVar()
         
         
     #Entry Caixa de dialogo para informação. obs caixa em branco
-        nome_entry= ctk.CTkEntry(self,width=350,textvariable=nome_values,font=("Century Gohtic bold",16),fg_color="transparent")    
-        contact_entry= ctk.CTkEntry(self,width=200,textvariable=contact_values,font=("Century Gohtic bold",16),fg_color="transparent")
-        age_entry= ctk.CTkEntry(self,width=150,textvariable=age_values,font=("Century Gohtic bold",16),fg_color="transparent")
-        address_entry= ctk.CTkEntry(self,width=200,textvariable=address_values,font=("Century Gohtic bold",16),fg_color="transparent")        
+        nome_entry= ctk.CTkEntry(self,width=350,textvariable=nome_value,font=("Century Gohtic bold",16),fg_color="transparent")    
+        contact_entry= ctk.CTkEntry(self,width=200,textvariable=contact_value,font=("Century Gohtic bold",16),fg_color="transparent")
+        age_entry= ctk.CTkEntry(self,width=150,textvariable=age_value,font=("Century Gohtic bold",16),fg_color="transparent")
+        address_entry= ctk.CTkEntry(self,width=200,textvariable=address_value,font=("Century Gohtic bold",16),fg_color="transparent")        
     
     #Combobox caixa de genero com  3 opçoes
-        gender_combobox = ctk.CTkComboBox(self,values=["Masculino","Feminino","Trasgenero"],font=("Centurty Gothic bold",14),width=150)
+        gender_combobox = ctk.CTkComboBox(self,value=["Masculino","Feminino","Trasgenero"],font=("Centurty Gothic bold",14),width=150)
         gender_combobox.set("Masculino")
         
     #Entrada de Obcervaçoes
