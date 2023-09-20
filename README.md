@@ -5,6 +5,9 @@
 <img src="https://github.com/FelipeQ-CODE/ProjetoCadastro/assets/103467527/6a9e9791-b371-43e5-85b5-50d4b7ecab19"/>
 </div> 
 
+<div align="center">
+<img src="https://github.com/FelipeQ-CODE/ProjetoCadastro/assets/103467527/fac0bdf7-483b-4409-aedf-e4c1b1297848"/>
+</div>
 
 >"Fazer um código perfeito é difícil, mas não impossível para aqueles que querem vencer os obstáculo na área da Computação!"
 <!-- Minhas palavras --> 
